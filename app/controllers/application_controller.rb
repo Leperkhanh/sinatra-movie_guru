@@ -10,6 +10,13 @@ class ApplicationController < Sinatra::Base
     register Sinatra::Flash
   end
 
+  get "/" do
+    @movies = Movie.all
+    @reviews = Review.all
+    erb :index
+  end
+
+
   helpers do
 
     def logged_in?
