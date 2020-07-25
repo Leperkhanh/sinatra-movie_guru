@@ -16,6 +16,17 @@
   </head>
   <body>
     <div class="wrapper">
+      <% if flash[:message] %>
+        <h3 style="color:white; background-color:green; margin-bottom:0; font-family: sans-serif; text-align:center;">
+          <%= flash[:message] %>
+        </h3>
+      <% end %>  
+
+      <% if flash[:error] %>
+        <h3 style="color:red">
+          <%= flash[:error] %>
+        </h3>  
+      <% end %>
 
 
     <!-- Navigation -->
