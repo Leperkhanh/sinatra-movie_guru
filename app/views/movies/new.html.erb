@@ -1,1 +1,33 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<div class="container">
+  <div class="card border-0 shadow my-5">
+    <div class="card-body p-5">
+      <h1 class="font-weight-light">Create a new movie</h1>
+      <p class="lead">
+        <form action="/movies" method="POST">
+            <p>
+                <label for="movie_title">Title:</label><br>
+                <input type="text" name="[movie][title]" id="movie_title">
+            </p>
+
+            <p>    
+                <label for="movie_img">Image Url:</label><br>
+                <input type="text" name="[movie][img]" id="movie_img">
+            </p>
+
+            <p>
+                <label for="movie_title">Trailer Url:</label><br>
+                <input type="text" name="[movie][trailer]" id="movie_trailer">
+            </p>
+
+            <p>
+                <label for="movie_summary">Summary:</label><br>
+                <textarea name="[movie][summary]" id="movie_summary" cols="30" rows="10"></textarea>
+            </p>   
+                <input type="submit" class="btn btn-primary btn-md" value="Create Movie">
+        </form>
+  
+    </p>
+      <div style="height: 400px"></div>
+    </div>
+  </div>
+</div>

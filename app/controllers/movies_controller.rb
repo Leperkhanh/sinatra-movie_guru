@@ -14,6 +14,7 @@ class MoviesController < ApplicationController
 
   # POST: /movies
   post "/movies" do
+    @movie = Movie.create(params[:movie])
     redirect "/movies"
   end
 
