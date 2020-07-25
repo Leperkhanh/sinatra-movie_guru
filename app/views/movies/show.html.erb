@@ -1,1 +1,68 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<div class="container">
+  <div class="card border-0 shadow my-5">
+    <div class="card-body p-5"> 
+
+      <div class="d-inline-block" style="padding-bottom:5px">
+        <div class="d-md-inline-block">
+          <h1 class="font-weight-light"><%= @movie.title %></h1>
+        </div>
+
+      
+        <div class="d-md-inline-block" style="margin-bottom:5px">
+          <form action="/movies/<%= @movie.id %>/delete" method="POST">
+            <input id="hidden" type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn btn-danger btn-md">Delete Movie</button>
+          </form>
+        </div>
+
+        <div class="d-md-inline-block">        
+          <a href="/movies/<%= @movie.id%>/edit"><button class="btn btn-primary btn-md">Edit Movie</button></a> <br>
+        </div>
+
+        <div class="d-md-inline-block">
+          <a href="/reviews/new"><button class="btn btn-primary btn-md">Add Review</button></a>
+        </div>
+      </div>  
+          
+
+      <div class="row">
+        <div class="col-md-6">
+          <img src="<%= @movie.img %>" class="img-fluid" style="width:100%" alt="">
+        </div>
+
+        <div class="col-md-6">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe width="560" height="315" src="<%= @movie.trailer %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <hr>
+
+          <div class="d-inline-block">
+
+            <div class="d-md-inline-block">
+              <h3>Reviews</h3>
+            </div>
+
+            <div class="d-md-inline-block" style="padding-left:3px; margin-bottom:10px; font-size:.9em; font-style:italic">
+              Avg Rating (<%= @movie.reviews.average('rating') %>)
+            </div>
+
+          </div>
+
+          <% @movie.reviews.each do |review| %>
+            <ul>
+              <li>"<%= review.content %>" <strong>Post by:</strong> <a href="/users/<%= review.user.id %>"><%= review.user.username %></a></li>
+            </ul>
+          <% end %>
+        </div>
+      
+        <p class="lead">
+          <h3>Movie Synopsis</h3>
+            <%= @movie.summary %>
+        </p>
+        
+        <div style="height: 10px"></div>
+      </div>
+    </div>
+  </div>
+</div>  
