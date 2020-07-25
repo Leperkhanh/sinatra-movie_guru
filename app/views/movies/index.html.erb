@@ -1,1 +1,14 @@
-<h1>This is the Model's index page.</h1>
+<div class="container">
+  <div class="card border-0 shadow my-5">
+    <div class="card-body p-5">
+      <h1 class="font-weight-light">Current Movies</h1>
+      <p class="lead">
+        <% @movies.each do |movie| %>
+        <a href="/movies/<%= movie.id %>"><h3><%= movie.title %></h3></a>
+        <%= movie.summary %>
+        <% end %>
+      </p>
+      <div style="height: 10px"></div>
+    </div>
+  </div>
+</div>

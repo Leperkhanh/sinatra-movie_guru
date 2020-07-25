@@ -2,6 +2,8 @@ class MoviesController < ApplicationController
 
   # GET: /movies
   get "/movies" do
+    @movies = Movie.all
+    flash[:warning] = "Hooray, Flash is working!"
     erb :"/movies/index.html"
   end
 
