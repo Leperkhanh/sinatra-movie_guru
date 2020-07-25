@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="card border-0 shadow my-5" style="max-height:1200px">
+    <div class="card-body p-5">
+      <h1 class="font-weight-light">Welcome to Movie-Guru</h1>
+        <div class="row">
+        
+          <div class="col-md-6">
+          <div class="card border-0 shadow my-5">
+            <p class="lead">
+              <h3 style="text-align:center">Top Rated Movies</h3>
+              <% @movies.each do |movie| %>
+                <ul>
+                  <li><a href="/movies/<%= movie.id %>"><%= movie.title %></a><span style="font-size:.8em"> <%= movie.reviews.average('rating') %></span></li>
+                </ul>
+              <% end %>
+           </p>
+          </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card border-0 shadow my-5">
+            <p class="lead">
+              <h3 style="text-align:center">Latest Reviews</h3>
+              <% @reviews.each do |review| %>
+                <ul>
+                  <li><em>"<%= review.content %>"</em> <a href="/movies/<%= review.movie.id %>"><%= review.movie.title %></a> <strong>Posted By:</strong> <a href="/users/<%= review.user.id %>"><%= review.user.username %></a></li>
+                </ul>
+              <% end %>
+            </p>
+          </div>
+          </div>
+
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
