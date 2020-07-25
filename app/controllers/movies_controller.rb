@@ -28,16 +28,32 @@ class MoviesController < ApplicationController
 
   # GET: /movies/5/edit
   get "/movies/:id/edit" do
+    @movie = Movie.find_by_id(params[:id])
     erb :"/movies/edit.html"
   end
 
   # PATCH: /movies/5
   patch "/movies/:id" do
-    redirect "/movies/:id"
+    if params[:movie] == ""
+      redirect to "/movies/#{params[:id]}/edit"
+    else
+      @movie = Movie.find_by_id(params[:id])
+      @movie.title = params[:movie][:title]
+      @movie.summary = params[:movie][:summary]
+      @movie.save
+      redirect to "/movies/#{@movie.id}"
+    end
   end
 
   # DELETE: /movies/5/delete
   delete "/movies/:id/delete" do
-    redirect "/movies"
+    if logged_in?
+      @movie = Movie.find_by_id(params[:id])
+        @movie.delete
+        redirect '/movies'
+      else
+        redirect '/movies'
+      end
+      redirect '/login'
   end
 end
