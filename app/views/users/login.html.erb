@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="card border-0 shadow my-5" style="text-align:center">
+    <div class="card-body p-5">
+      <h1 class="font-weight-light" style="padding-bottom:15px;">Log In</h1>
+      <p class="lead">
+        <form action="/users/login" method="POST">
+            <p>
+                <label for="username">Username:</label>
+                <input type="text" name="[user][username]" id="username">
+            </p>
+
+            <p>
+                <label for="password">Password:</label>
+                <input type="password" name="[user][password]" id="password">
+            </p>
+
+                
+
+                  <div>
+                    <input type="submit" class="btn btn-primary btn-md" value="Log In"> 
+                  </div>
+
+                 
+        </form>
+
+              <div style="padding-top:5px; padding-bottom:5px">
+                or
+              </div>
+
+        <div style="padding-top:10px">
+                    <a href="/users/new"><button class="btn btn-primary btn-md">Create Account</button></a> 
+                  </div>
+      </p>
+      <div style="height: 250px"></div>
+    </div>
+  </div>
+</div>

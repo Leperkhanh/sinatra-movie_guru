@@ -1,1 +1,28 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<div class="container">
+  <div class="card border-0 shadow my-5">
+    <div class="card-body p-5">
+      <h1 class="font-weight-light"><h1>Create an account</h1>
+      <p class="lead">
+        <form action="/users" method="POST">
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="[user][username]" id="username">
+    </p>
+
+    <p>
+        <label for="user_email">Email:</label>
+        <input type="text" name="[user][email]" id="user_email">
+    </p> 
+
+    <p>
+        <label for="user_password">Password:</label>
+        <input type="password" name="[user][password]" id="user_password">
+    </p>
+
+    <input type="submit" value="Create Account">   
+</form>
+        
+      <div style="height: 10px"></div>
+    </div>
+  </div>
+</div>
