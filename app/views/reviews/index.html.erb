@@ -1,1 +1,8 @@
 <h1>This is the Model's index page.</h1>
+
+<% @reviews.each do |review| %>
+    "<%= review.content %>"
+    <strong>Movie Title :</strong> <%= review.movie.title %> 
+    <strong>Posted By:</strong> <a href="/users/<%= review.user.id %>"><%= review.user.username %></a>
+    <br>
+<% end %>

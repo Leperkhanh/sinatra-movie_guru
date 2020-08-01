@@ -1,1 +1,46 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<div class="container">
+  <div class="card border-0 shadow my-5">
+    <div class="card-body p-5" style="text-align:center">
+      <h1 class="font-weight-light">Create A Review</h1>
+      <p class="lead">
+            <form action="/reviews" method="post">
+            <p>
+                Rating:
+                <select name="[review][rating]" id="review_rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </p>
+
+            <p>
+                Review Summary: <br>
+                <textarea name="[review][content]" id="review_content" cols="30" rows="10"></textarea>   
+            </p>
+
+            <p>
+                Select Movie: <br>
+                <select name="[movie][title]" id="">
+                    <% @movies.collect do |movie| %>
+                        <option value="<%= movie.title %>"><%= movie.title %></option>
+                    <% end %>
+                </select>
+            </p>
+
+            <div><input type="submit" class="btn btn-primary btn-md" value="Submit Review"></div>
+        </form>
+      </p>
+
+      <div style="height: 450px"></div>
+
+    </div>
+  </div>
+</div>
+
