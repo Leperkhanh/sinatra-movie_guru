@@ -33,6 +33,7 @@ end
     if !logged_in?
       erb :"/users/new.html"
     else
+      flash[:error] = "You are already logged in"
       redirect "/users/show" 
     end   
   end
@@ -43,6 +44,7 @@ end
       flash[:message] = "You have successfully logged out"
       redirect to 'users/login'
     else
+      flash[:error] = "You must be logged in first"
       redirect to '/'
     end
   end
@@ -67,7 +69,17 @@ end
 
   # GET: /users/5/edit
   get "/users/:id/edit" do
-    erb :"/users/edit.html"
+    if logged_in?
+      @user = User.find_by_id(params[:id])
+      if @user.id == current_user.id
+        erb :"/users/edit.html"
+      else  
+        flash[:error] = "You do not have permission to edit this account"
+      end      
+    else  
+      flash[:error] = "You do not have permission to edit this account"
+      redirect "/"
+    end    
   end
 
   # PATCH: /users/5

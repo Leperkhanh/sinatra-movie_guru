@@ -1,8 +1,21 @@
 <div class="container">
   <div class="card border-0 shadow my-5">
     <div class="card-body p-5">
-      <h1 class="font-weight-light">My Account <span style="color:blue; font-size:.7em;">(<%= @user.username %>)</span></h1>
-      <p class="lead">
+      <div class="d-inline-block">
+
+        <div class="d-md-inline-block">
+          <h1 class="font-weight-light">My Account <span style="color:blue; font-size:.7em;">(<%= @user.username %>)</span></h1>
+        </div>
+
+        <div class="d-md-inline-block">
+          <a href="/users/<%= @user.id %>/edit"><button class="btn btn-primary btn-sm" style="margin-bottom:10px;">Edit Account</button></a>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <p class="lead" style="text-align:center">
 
         <h3>My Reviews</h3>
         <div>
