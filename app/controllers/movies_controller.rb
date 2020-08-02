@@ -9,13 +9,22 @@ class MoviesController < ApplicationController
 
   # GET: /movies/new
   get "/movies/new" do
-    erb :"/movies/new.html"
+    if current_user.is_admin?
+      erb :"/movies/new.html"
+    else
+      flash[:error] = "You do not have permission to create movies"
+      redirect "/movies"
   end
 
   # POST: /movies
   post "/movies" do
+    if current_user.is_admin?
     @movie = Movie.create(params[:movie])
     redirect "/movies"
+    else
+      flash[:error] = "You do not have permission to create movies"
+      redirect "/movies"
+    end
   end
 
   # GET: /movies/5
@@ -33,32 +42,43 @@ class MoviesController < ApplicationController
 
   # GET: /movies/5/edit
   get "/movies/:id/edit" do
-    @movie = Movie.find_by_id(params[:id])
-    erb :"/movies/edit.html"
+    if current_user.is_admin?
+      @movie = Movie.find_by_id(params[:id])
+      erb :"/movies/edit.html"
+    else
+      flash[:error] = "You do not have permission to edit movies"
+      redirect "/movies"
   end
 
   # PATCH: /movies/5
   patch "/movies/:id" do
-    if params[:movie] == ""
-      redirect to "/movies/#{params[:id]}/edit"
-    else
+    if current_user.is_admin?
       @movie = Movie.find_by_id(params[:id])
       @movie.title = params[:movie][:title]
       @movie.summary = params[:movie][:summary]
       @movie.save
-      redirect "/movies/#{@movie.id}"
+      if @movie.save
+        flash[:message] = "You have successfully updated the movie"
+        redirect to "/movies/#{@movie.id}"
+      else
+        flash[:error] = "Movie was unsuccessfully saved"
+        redirect "/movies/#{@movie.id}"  
+      end  
     end
   end
 
+
   # DELETE: /movies/5/delete
   delete "/movies/:id/delete" do
-    if logged_in?
+    if current_user.is_admin?
       @movie = Movie.find_by_id(params[:id])
         @movie.delete
         redirect '/movies'
       else
         redirect '/movies'
-      end
-        redirect '/login'
+    end
+    flash[:error] = "You do not have pemission to delete movies"
+    redirect '/login'
   end
-end
+
+end  
