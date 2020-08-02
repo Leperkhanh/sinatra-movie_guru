@@ -127,15 +127,20 @@ class ReviewsController < ApplicationController
 
   # PATCH: /reviews/5
   patch "/reviews/:id" do
-    if params[:review] == ""
-      redirect to "/reviews/#{params[:id]}/edit"
-    else
       @review = Review.find_by_id(params[:id])
-      @review.rating = params[:review][:rating]
-      @review.content = params[:review][:content]
-      @review.save
-      redirect to "/reviews/#{@review.id}"
-    end
+      if @review.user_id == current_user.id
+        @review.rating = params[:review][:rating]
+        @review.content = params[:review][:content]
+        @review.save
+        if @review.save
+          redirect to "/reviews/#{@review.id}"
+        else
+          flash[:error] = "Review was not successfully changed"
+          redirect "/reviews/#{params[:id]}/edit"
+        end     
+      else
+        flash[:error] = "You do not have permission to edit this review"   
+      end
     redirect "/reviews/:id"
   end
 
