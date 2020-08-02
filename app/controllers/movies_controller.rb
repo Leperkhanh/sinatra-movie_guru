@@ -20,10 +20,15 @@ class MoviesController < ApplicationController
 
   # GET: /movies/5
   get "/movies/:id" do
-    @movie = Movie.find(params[:id])
-    @users = @movie.users
-    @reviews = @movie.reviews
-    erb :"/movies/show.html"
+    @movie = Movie.find_by_id(params[:id])
+    if @movie
+      @users = @movie.users
+      @reviews = @movie.reviews 
+      erb :"/movies/show.html"
+    else
+      flash[:error] = "Sorry we cannot currently find this movie!"
+      redirect "/movies"   
+    end
   end
 
   # GET: /movies/5/edit
@@ -41,7 +46,7 @@ class MoviesController < ApplicationController
       @movie.title = params[:movie][:title]
       @movie.summary = params[:movie][:summary]
       @movie.save
-      redirect to "/movies/#{@movie.id}"
+      redirect "/movies/#{@movie.id}"
     end
   end
 
@@ -54,6 +59,6 @@ class MoviesController < ApplicationController
       else
         redirect '/movies'
       end
-      redirect '/login'
+        redirect '/login'
   end
 end
