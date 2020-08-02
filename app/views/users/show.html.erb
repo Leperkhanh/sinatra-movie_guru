@@ -8,8 +8,14 @@
         </div>
 
         <div class="d-md-inline-block">
-          <a href="/users/<%= @user.id %>/edit"><button class="btn btn-primary btn-sm" style="margin-bottom:10px;">Edit Account</button></a>
+          <a href="/users/<%= @user.id %>/edit"><button class="btn btn-primary btn-sm" style="margin-bottom:15px; margin-left:5px;">Edit Account</button></a>
         </div>
+
+        <% if current_user.is_admin? %>
+          <div class="d-md-inline-block">
+          <a href="/users/<%= @user.id %>/delete"><button class="btn btn-danger btn-sm" style="margin-bottom:15px; margin-left:5px;">Delete Account</button></a>
+        </div>
+        <% end %>
 
       </div>
 

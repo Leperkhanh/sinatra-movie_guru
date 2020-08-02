@@ -109,6 +109,15 @@ end
 
   # DELETE: /users/5/delete
   delete "/users/:id/delete" do
-    redirect "/users"
+    if current_user.is_admin?
+      @user = User.find_by_id(params[:id])
+      @user.destroy
+      flash[:message] = "You have successfully deleted the account"
+      redirect '/users'
+    else
+      flash[:error] = "You do not have pemission to delete users"
+      redirect '/users'
+    end
   end
+
 end
