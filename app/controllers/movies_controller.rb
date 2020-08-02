@@ -14,6 +14,7 @@ class MoviesController < ApplicationController
     else
       flash[:error] = "You do not have permission to create movies"
       redirect "/movies"
+    end  
   end
 
   # POST: /movies
@@ -48,6 +49,7 @@ class MoviesController < ApplicationController
     else
       flash[:error] = "You do not have permission to edit movies"
       redirect "/movies"
+    end  
   end
 
   # PATCH: /movies/5
@@ -56,6 +58,8 @@ class MoviesController < ApplicationController
       @movie = Movie.find_by_id(params[:id])
       @movie.title = params[:movie][:title]
       @movie.summary = params[:movie][:summary]
+      @movie.img = params[:movie][:img]
+      @movie.trailer = params[:movie][:trailer]
       @movie.save
       if @movie.save
         flash[:message] = "You have successfully updated the movie"

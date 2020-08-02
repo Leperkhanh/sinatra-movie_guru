@@ -1,58 +1,64 @@
 <div class="container">
   <div class="card border-0 shadow my-5">
     <div class="card-body p-5" style="text-align:center">
-       <h1 class="font-weight-light">Edit Movie</h1>
+      <h1 class="font-weight-light">Edit Movie</h1>
+      <p class="lead">
+        <div class="row">
 
-        <div>
-            <img style="width:30%; padding-top:5px; padding-bottom:5px" src="<%= @movie.img %> " alt=""> 
+            <div class="col-md-6">
+                <img src="<%= @movie.img %>" class="img-fluid" style="width:90%" alt="">
+            </div>
+
+            <div class="col-md-6" style="margin:auto">
+
+                <form action="/movies/<%= @movie.id %>" method="post">
+
+                    <div style="font-size:1.5em">
+                        <strong><label for="movie_title">Title:</label></strong>
+                    </div>
+
+                    <div>
+                        <input type="hidden" name="_method" value="PATCH">
+                        <input type="text" name="[movie][title]" id="movie_title" value="<%= @movie.title %>">
+                    </div>
+
+                    <div style="font-size:1.5em">
+                        <strong><label for="movie_img">Image Url:</label></strong>
+                    </div>
+
+                    <div style="padding-bottom:5px">
+                        <input type="hidden" name="_method" value="PATCH">
+                        <input type="text" name="[movie][img]" id="movie_img" value="<%= @movie.img %>">
+                    </div>
+
+                    <div style="font-size:1.5em">
+                        <strong><label for="movie_trailer">Trailer Url:</label></strong>
+                    </div>
+
+                    <div style="padding-bottom:5px">
+                        <input type="hidden" name="_method" value="PATCH">
+                        <input type="text" name="[movie][trailer]" id="movie_trailer" value="<%= @movie.trailer %>">
+                    </div>
+
+                    <div style="font-size:1.5em">
+                        <strong><label for="movie_summary">Summary:</label></strong>
+                    </div>
+
+                    <div style="padding-bottom:10px">
+                        <input type="hidden" name="_method" value="PATCH">
+                        <textarea name="[movie][summary]" id="movie_summary"  cols="30" rows="10"><%= @movie.summary %></textarea>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="btn btn-primary btn-md" value="Edit Movie">
+                    </div>
+
+                </form>
+            </div>
         </div>
-
-        <p class="lead">
-            <form action="/movies/<%= @movie.id %>" method="post">
-
-                <div style="font-size:1.5em">
-                    <strong><label for="movie_title">Title:</label></strong>
-                </div>
-
-                <div>
-                    <input type="hidden" name="_method" value="PATCH">
-                    <input type="text" name="[movie][title]" id="movie_title" value="<%= @movie.title %>">
-                </div>
-
-                <div style="font-size:1.5em">
-                    <strong><label for="movie_img">Image Url:</label></strong>
-                </div>
-
-                <div style="padding-bottom:5px">
-                    <input type="hidden" name="_method" value="PATCH">
-                    <input type="text" name="[movie][img]" id="movie_img" value="<%= @movie.img %>">
-                </div>
-
-                <div style="font-size:1.5em">
-                    <strong><label for="movie_trailer">Trailer Url:</label></strong>
-                </div>
-
-                <div style="padding-bottom:5px">
-                    <input type="hidden" name="_method" value="PATCH">
-                    <input type="text" name="[movie][trailer]" id="movie_trailer" value="<%= @movie.trailer %>">
-                </div>
-
-                <div style="font-size:1.5em">
-                    <strong><label for="movie_summary">Summary:</label></strong>
-                </div>
-
-                <div style="padding-bottom:10px">
-                    <input type="hidden" name="_method" value="PATCH">
-                    <textarea name="[movie][summary]" id="movie_summary"  cols="30" rows="10"><%= @movie.summary %></textarea>
-                </div>
-
-                <div>
-                    <input type="submit" class="btn btn-primary btn-md" value="Edit Movie">
-                </div>
-
-            </form>
-        </p>
+      
+      <div style="height: 100px"></div>
+    </p>
     </div>
   </div>
 </div>
-
