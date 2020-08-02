@@ -84,8 +84,28 @@ end
 
   # PATCH: /users/5
   patch "/users/:id" do
-    redirect "/users/:id"
-  end
+    if logged_in?
+      @user = User.find_by_id(params[:id])
+      if @user.id == current_user.id
+        @user.email = params[:user][:email]
+        @user.password = params[:user][:password]
+        @user.save
+        if @user.save
+          flash[:message] = "You have updated you account"
+          redirect "/users/#{@user.id}"
+        else
+          flash[:error] = "Account was not successfully updated"
+          redirect "/users/#{@user.id}"
+        end
+      else
+        flash[:error] = "You do not have permission to edit this account"      
+        redirect "/"
+      end
+    else
+      flash[:error] = "Please login"
+      redirect "/users/login"
+    end        
+end
 
   # DELETE: /users/5/delete
   delete "/users/:id/delete" do
