@@ -3,30 +3,41 @@
     <div class="card-body p-5" style="text-align:center">
       <h1 class="font-weight-light">Edit Account</h1>
       <p class="lead">
+      
         <form action="/users/<%= @user.id %>" method="POST">
-            <div>
-                <label for="user_email">Email:</label>
-            </div>
+          <div>
+            <label for="username">Username:</label>
+          </div>
 
-            <div>
-                <input type="hidden" name="_method" value="PATCH">
-                <input type="text" name="[user][email]" id="user_email" value="<%= @user.email %>">
-            </div>
+          <div>
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="text" name="[user][username]" id="username" value="<%= @user.username %>">    
+          </div>
 
-            <div>
-                <label for="user_password">New Password:</label>
-            </div>
+          <div>
+            <label style="margin-top:5px;" for="email">Email:</label>
+          </div>
 
-            <div>
-                <input type="hidden" name="_method" value="PATCH">
-                <input type="password" name="[user][password]" id="user_password">
-            </div>
+          <div>
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="text" name="[user][email]" id="email" value="<%= @user.username %>">    
+          </div>
 
-            <div>
-                <input type="hidden" name="_method" value="PATCH">
-                <input type="submit" class="btn btn-primary btn-md" style="margin-top:10px;" value="Update Account">
-            </div>
+          <div>
+            <label style="margin-top:5px;" for="password">New Password:</label>
+          </div>
+
+          <div>
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="password" name="[user][password]" id="username">    
+          </div>
+
+          <div>
+            <input type="submit" class="btn btn-primary btn-md" style="margin-top:10px;" value="Submit Changes">
+          </div>
+
         </form>
+
       </p>
       <div style="height: 100px"></div>
     </div>

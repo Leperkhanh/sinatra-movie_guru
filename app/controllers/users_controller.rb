@@ -61,6 +61,7 @@ end
     if logged_in?
       @user = current_user
       @reviews = @user.reviews
+      @review = @user.reviews.first
       erb :"/users/show.html"
     else  
       redirect "/users/login"
@@ -86,26 +87,26 @@ end
   patch "/users/:id" do
     if logged_in?
       @user = User.find_by_id(params[:id])
-      if @user.id == current_user.id
-        @user.email = params[:user][:email]
-        @user.password = params[:user][:password]
-        @user.save
-        if @user.save
-          flash[:message] = "You have updated you account"
-          redirect "/users/#{@user.id}"
+        if @user.id == current_user.id
+          @user.username = params[:user][:username]
+          @user.email = params[:user][:email]
+          @user.password = params[:user][:password]
+          @user.save
+          if @user.save
+            flash[:message] = "Your account has been updated"
+            redirect "/users/:id"
+          else
+            flash[:error] = "Your acccunt was not updated"
+            redirect "/users/#{@user.id}/edit"      
+          end
         else
-          flash[:error] = "Account was not successfully updated"
-          redirect "/users/#{@user.id}"
+          flash[:error] = "You do not have permission to edit this account"
+          redirect "/"    
         end
-      else
-        flash[:error] = "You do not have permission to edit this account"      
-        redirect "/"
-      end
-    else
-      flash[:error] = "Please login"
-      redirect "/users/login"
-    end        
-end
+    else    
+      redirect "/users/:id"
+    end
+  end  
 
   # DELETE: /users/5/delete
   delete "/users/:id/delete" do
