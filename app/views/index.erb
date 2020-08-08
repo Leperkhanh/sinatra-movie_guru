@@ -23,7 +23,7 @@
               <h3 style="text-align:center">Reviews</h3>
               <% @reviews.each do |review| %>
                 <ul>
-                  <li><em>"<%= review.content %>"</em> <a href="/movies/<%= review.movie.id %>"><%= review.movie.title %></a> <strong>Posted By:</strong> <a href="/users/<%= review.user.id %>"><%= review.user.username %></a></li>
+                  <li><em>"<%= review.content %>"</em> <a href="/movies/<%= review.movie.id %>"><%= review.movie.title %></a> <br><strong>Posted By:</strong> <%= review.user.username %></li> <hr style="width:90%;">
                 </ul>
               <% end %>
             </p>
