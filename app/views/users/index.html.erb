@@ -25,13 +25,3 @@
 </div>
 
 
-<% @users.each do |user| %>
-    <a href="/users/<%= user.id %>"><%= user.username %></a>
-
-    <form action="/users/<%= user.id %>/delete" method="POST">
-            <input id="hidden" type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn btn-danger btn-md">Delete Account</button>
-          </form>
-
-<% end %>
-
