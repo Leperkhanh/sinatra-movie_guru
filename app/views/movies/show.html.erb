@@ -3,25 +3,32 @@
     <div class="card-body p-5"> 
 
       <div class="d-inline-block" style="padding-bottom:5px">
+
         <div class="d-md-inline-block">
           <h1 class="font-weight-light"><%= @movie.title %></h1>
         </div>
 
-      
-        <div class="d-md-inline-block" style="margin-bottom:5px">
+        <div class="d-md-inline-block">
+          <a href="/reviews/new"><button class="btn btn-primary btn-md" style="margin-bottom:15px">Add Review</button></a>
+        </div>
+
+        <% if current_user %>
+        <% if current_user.is_admin? %>
+
+          <div class="d-md-inline-block">        
+            <a href="/movies/<%= @movie.id%>/edit"><button class="btn btn-primary btn-md" style="margin-bottom:15px">Edit Movie</button></a> <br>
+          </div>
+
+          <div class="d-md-inline-block" style="margin-bottom:5px">
           <form action="/movies/<%= @movie.id %>/delete" method="POST">
             <input id="hidden" type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn btn-danger btn-md">Delete Movie</button>
+            <button type="submit" class="btn btn-danger btn-md" style="margin-bottom:15px">Delete Movie</button>
           </form>
         </div>
+        
+        <% end %>
+        <% end %>
 
-        <div class="d-md-inline-block">        
-          <a href="/movies/<%= @movie.id%>/edit"><button class="btn btn-primary btn-md">Edit Movie</button></a> <br>
-        </div>
-
-        <div class="d-md-inline-block">
-          <a href="/reviews/new"><button class="btn btn-primary btn-md">Add Review</button></a>
-        </div>
       </div>  
           
 
@@ -51,7 +58,7 @@
 
           <% @movie.reviews.each do |review| %>
             <ul>
-              <li>"<%= review.content %>" <strong>Post by:</strong> <a href="/users/<%= review.user.id %>"><%= review.user.username %></a></li>
+              <li>"<%= review.content %>" <strong>Posted by:</strong> <a href="/users/<%= review.user.id %>"><%= review.user.username %></a></li>
             </ul>
           <% end %>
         </div>

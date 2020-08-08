@@ -27,6 +27,15 @@ class UsersController < ApplicationController
     end
 end
 
+  get "/users/admin" do 
+    if current_user.is_admin?
+      erb :"/users/admin.html"
+    else
+      flash[:error] = "You do not have pemission to delete users"
+      redirect '/users'
+    end  
+  end
+
 
   # GET: /users/new
   get "/users/new" do

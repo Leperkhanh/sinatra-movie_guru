@@ -1,3 +1,30 @@
+<div class="container">
+  <div class="card border-0 shadow my-5">
+    <div class="card-body p-5" style="text-align:center">
+      <h1 class="font-weight-light">Current Users</h1>
+      <p class="lead" style="margin-bottom: 5px">
+        <% @users.each do |user| %>
+                <div class="d-inline-block">
+                  <div class="d-md-inline-block" style="padding-bottom:10px;">
+                    <a href="/users/<%= user.id %>"><%= user.username %>
+                  </div>
+
+                  <div>
+                    <form action="/users/<%= user.id %>/delete" method="POST">
+                      <input id="hidden" type="hidden" name="_method" value="DELETE">
+                      <button type="submit" class="btn btn-danger btn-sm">Delete Account</button>
+                    </form>
+                  </div>
+
+                </div>  
+        <% end %>
+      </p>
+      <div style="height: 100px"></div>
+    </div>
+  </div>
+</div>
+
+
 <% @users.each do |user| %>
     <a href="/users/<%= user.id %>"><%= user.username %></a>
 
