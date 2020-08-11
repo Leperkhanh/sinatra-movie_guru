@@ -76,6 +76,8 @@ class MoviesController < ApplicationController
   delete "/movies/:id/delete" do
     if current_user.is_admin?
       @movie = Movie.find_by_id(params[:id])
+        @reviews = @movie.reviews
+        @reviews.destroy_all
         @movie.destroy
         redirect '/movies'
       else

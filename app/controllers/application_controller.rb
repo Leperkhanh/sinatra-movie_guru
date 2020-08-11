@@ -12,8 +12,8 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     @movies = Movie.all
-    @reviews = Review.all
-    erb :index
+    @reviews = Review.all 
+      erb :index        
   end
 
 

@@ -121,6 +121,8 @@ end
   delete "/users/:id/delete" do
     if current_user.is_admin?
       @user = User.find_by_id(params[:id])
+      @reviews = @user.reviews
+      @reviews.destroy_all
       @user.destroy
       flash[:message] = "You have successfully deleted the account"
       redirect '/users'
